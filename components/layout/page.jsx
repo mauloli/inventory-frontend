@@ -1,19 +1,10 @@
 import Avatar from '@mui/material/Avatar';
-
+import SideBar from '../sidebar/sideBar';
 export default function Layout(props) {
   return (
     <div style={{ width: '100%', height: '90vh', display: 'flex' }}>
-      <div style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: '40px'
-      }}>
-        <h1 style={{ cursor: 'pointer' }}>LOGO</h1>
-        <span>test</span>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 3 }}>
+      <SideBar/>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 6 }}>
         <div style={{
           flex: 1,
           display: 'flex',
@@ -34,6 +25,10 @@ export default function Layout(props) {
           </div>
           <div style={{ display: 'flex', flex: 1, height: '100%', justifyContent: 'center', alignItems: 'center' }}>
             <Avatar sx={{}}>N</Avatar>
+            <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '2px solid black', marginLeft: '5px', paddingLeft: '5px' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Name User</span>
+              <span style={{ fontSize: '13px' }}>Network Engineering</span>
+            </div>
           </div>
 
         </div>
