@@ -10,7 +10,7 @@ export default function page() {
           display: 'flex', flexDirection: 'column', height: '70%', padding: '0px 30px'
         }}>
           <div className='form-username' style={{ display: 'flex', flexDirection: 'column', marginTop: '30px' }}>
-            <label for="username" style={{
+            <label style={{
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Account name or email:</label>
             <input type="text" id="username" name="username" required style={{
@@ -20,17 +20,16 @@ export default function page() {
           </div>
 
           <div className='form-pasword' style={{ display: 'flex', flexDirection: 'column', marginTop: '30px' }}>
-            <label for="password" style={{
+            <label style={{
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Password:</label>
             <input type="password" id="password" name="password" required style={{
               height: '45px',
               border: 'solid 1px rgb(135, 170, 172)',
-              borderRadius: '25px', 
+              borderRadius: '25px',
               backgroundColor: 'rgb(149, 187, 189)',
               textAlign: 'center',
             }} />
-            <i class="fas fa-eye" id="togglePassword"></i>
           </div>
 
         </div>
