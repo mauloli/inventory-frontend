@@ -5,8 +5,9 @@ import CircleChart from '@/components/chart/circleChart';
 import VerticalChart from '@/components/chart/verticalChart';
 import HorizontalBarChart from '@/components/chart/horizontalChart';
 export default function Home() {
+  const totalData = 100;
   return (
-    <Layout>
+    <Layout selected={'dashboard'}>
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         {/* grafik bulat */}
         <div style={{ flex: 1, display: 'flex', justifyContent: 'space-between' }}>
@@ -16,7 +17,7 @@ export default function Home() {
               <CircleChart
                 backgroundColor={['#FF6384', '#36A2EB', '#FFCE56']}
                 dataChart={[30, 50, 20]}
-                totalData={100}
+                totalData={totalData}
               />
             </div>
           </div>
@@ -26,7 +27,7 @@ export default function Home() {
               <CircleChart
                 backgroundColor={['#36A2EB']}
                 dataChart={[50]}
-                totalData={100}
+                totalData={totalData}
               />
             </div>
           </div>
@@ -36,7 +37,7 @@ export default function Home() {
               <CircleChart
                 backgroundColor={['#FFCE56']}
                 dataChart={[20]}
-                totalData={100}
+                totalData={totalData}
               />
             </div>
           </div>
@@ -46,7 +47,7 @@ export default function Home() {
               <CircleChart
                 backgroundColor={['#FF6384']}
                 dataChart={[30]}
-                totalData={100}
+                totalData={totalData}
               />
             </div>
           </div>

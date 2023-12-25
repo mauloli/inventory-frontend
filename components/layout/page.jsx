@@ -1,9 +1,10 @@
 import Avatar from '@mui/material/Avatar';
 import SideBar from '../sidebar/sideBar';
 export default function Layout(props) {
+  const { selected = null } = props;
   return (
     <div style={{ width: '100%', height: '90vh', display: 'flex' }}>
-      <SideBar/>
+      <SideBar selected={selected}/>
       <div style={{ display: 'flex', flexDirection: 'column', flex: 6 }}>
         <div style={{
           flex: 1,
