@@ -26,9 +26,8 @@ function CircleChart(props) {
 
   const textCenter = {
     id: 'textCenter',
-    beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
-
+    beforeDatasetsDraw(chart) {
+      const { ctx } = chart;
       ctx.save();
       ctx.font = 'bolder 15px san-serif';
       ctx.fillStyle = 'black';

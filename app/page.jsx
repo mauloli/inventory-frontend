@@ -1,8 +1,9 @@
 import React from 'react';
 import Layout from '/components/layout/page';
 import styles from './page.module.css';
-import CircleChart from '@/components/chart/page';
-
+import CircleChart from '@/components/chart/circleChart';
+import VerticalChart from '@/components/chart/verticalChart';
+import HorizontalBarChart from '@/components/chart/horizontalChart';
 export default function Home() {
   return (
     <Layout>
@@ -50,9 +51,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div style={{ flex: 1, display: 'flex' }}>
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>chart satu</div>
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>chart dua</div>
+        <div style={{ flex: 1, display: 'flex', marginTop: '60px' }}>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '90%' }}>
+              <VerticalChart />
+            </div>
+          </div>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '90%' }}>
+              <HorizontalBarChart />
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
