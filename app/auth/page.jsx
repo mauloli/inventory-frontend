@@ -3,7 +3,8 @@ import styles from './auth.module.css';
 
 export default function page() {
   return (
-    <div className={styles.boddy} >
+    <div className={styles.boddy} style={{ margin: '0px', padding: '0px' }} >
+      <img src="./loginn.jpg" style={{ position: 'absolute', zIndex: -1, height: '105vh', marginTop: '0px' }} />
       <div className={styles.frameLogin}>
         <h3 style={{ marginTop: '10px', marginBottom: '0px' }}>Login Into SSNI</h3>
         <div className='test' style={{
