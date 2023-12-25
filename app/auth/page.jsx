@@ -24,15 +24,25 @@ export default function page() {
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Password:</label>
             <input type="password" id="password" name="password" required style={{
-              height: '45px', border: 'solid 1px rgb(135, 170, 172)', borderRadius: '25px', backgroundColor: 'rgb(149, 187, 189)',
-              textAlign: 'center'
+              height: '45px',
+              border: 'solid 1px rgb(135, 170, 172)',
+              borderRadius: '25px', 
+              backgroundColor: 'rgb(149, 187, 189)',
+              textAlign: 'center',
             }} />
             <i class="fas fa-eye" id="togglePassword"></i>
           </div>
 
         </div>
         <div>
-          <button style={{ width: '175ox', height: '40px', border: '0px', borderRadius: '13px',backgroundColor: 'rgb(149, 187, 189)' ,marginTop:'10px'}}>Login</button>
+          <button style={{
+            width: '175px',
+            height: '40px',
+            border: '0px',
+            borderRadius: '13px',
+            backgroundColor: 'rgb(149, 187, 189)',
+            marginTop: '10px'
+          }}>Login</button>
         </div>
 
       </div>
