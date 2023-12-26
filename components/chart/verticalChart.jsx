@@ -26,7 +26,7 @@ const BarChart = () => {
     datasets: [
       {
         label: 'Year of purhcase',
-        backgroundColor: 'wheat',
+        backgroundColor: '#F8FCE3',
         borderColor: 'grey',
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.4)',
@@ -44,7 +44,7 @@ const BarChart = () => {
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return <Bar data={data} options={options} style={{backgroundColor:'#F6FDCF',borderRadius:'10px'}}/>;
 };
 
 export default BarChart;

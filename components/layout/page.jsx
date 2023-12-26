@@ -3,9 +3,9 @@ import SideBar from '../sidebar/sideBar';
 export default function Layout(props) {
   const { selected = null } = props;
   return (
-    <div style={{ width: '100%', height: '90vh', display: 'flex' }}>
+    <div style={{ width: '100%', height: '100vh', display: 'flex',backgroundColor:'#F8FCE3' }}>
       <SideBar selected={selected}/>
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 6 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 4 }}>
         <div style={{
           flex: 1,
           display: 'flex',

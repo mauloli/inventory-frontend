@@ -5,6 +5,7 @@ import CircleChart from '@/components/chart/circleChart';
 import VerticalChart from '@/components/chart/verticalChart';
 import HorizontalBarChart from '@/components/chart/horizontalChart';
 export default function Home() {
+  const datta = [10, 20, 5]
   const totalData = 100;
   return (
     <Layout selected={'dashboard'}>
@@ -16,7 +17,7 @@ export default function Home() {
             <div style={{ width: '200px' }}>
               <CircleChart
                 backgroundColor={['#FF6384', '#36A2EB', '#FFCE56']}
-                dataChart={[30, 50, 20]}
+                dataChart={datta}
                 totalData={totalData}
               />
             </div>

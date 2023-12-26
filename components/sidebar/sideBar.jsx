@@ -16,7 +16,8 @@ function SideBar(props) {
       flexDirection: 'column',
       alignItems: 'center',
       paddingTop: '40px',
-      marginRight: '30px'
+      marginRight: '30px',
+      backgroundColor:'#F6FDCF'
     }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h1 style={{ cursor: 'pointer' }}>LOGO</h1>
