@@ -1,22 +1,41 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './auth.module.css';
 import { useRouter } from 'next/navigation';
 import axios from '../../utils/axios';
+import Cookies from 'js-cookie';
 
+export default function usePage() {
+  const [form, setForm] = useState({
+    username: '',
+    password: '',
+    strategy: 'local-username'
+  });
 
-export default async function page() {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const handleSubmit = async (event) => {
     try {
-      console.log('first')
-      const login = await axios.post('/authentication')
-      console.log(login)
+      event.preventDefault();
+      const login = await axios.post('/authentication', form);
+      localStorage.setItem('data', JSON.stringify(login.data.user))
+      const test = localStorage.getItem('data')
+      console.log(test)
+      console.log(login.data.user)
+      // localStorage.setItem()
     } catch (error) {
-      throw new Error(error)
+      if (error.response.data.message == 'Invalid login') {
+        alert('Username atau password salah');
+      } else {
+        alert(error.response.data.message);
+
+      }
     }
-    // event.preventDefault();
     // router.push('/');
   };
 
@@ -33,23 +52,33 @@ export default async function page() {
             <label style={{
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Account name or email:</label>
-            <input type="text" id="username" name="username" required style={{
-              height: '45px', border: 'solid 1px rgb(135, 170, 172)', borderRadius: '25px ', backgroundColor: 'rgb(149, 187, 189)',
-              textAlign: 'center'
-            }} />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              style={{
+                height: '45px', border: 'solid 1px rgb(135, 170, 172)', borderRadius: '25px ', backgroundColor: 'rgb(149, 187, 189)',
+                textAlign: 'center'
+              }}
+              onChange={handleChange}
+            />
           </div>
 
           <div className='form-pasword' style={{ display: 'flex', flexDirection: 'column', marginTop: '30px' }}>
             <label style={{
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Password:</label>
-            <input type="password" id="password" name="password" required style={{
-              height: '45px',
-              border: 'solid 1px rgb(135, 170, 172)',
-              borderRadius: '25px',
-              backgroundColor: 'rgb(149, 187, 189)',
-              textAlign: 'center',
-            }} />
+            <input type="password" id="password" name="password" required
+              style={{
+                height: '45px',
+                border: 'solid 1px rgb(135, 170, 172)',
+                borderRadius: '25px',
+                backgroundColor: 'rgb(149, 187, 189)',
+                textAlign: 'center',
+              }}
+              onChange={handleChange}
+            />
           </div>
 
         </div>

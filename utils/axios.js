@@ -1,6 +1,7 @@
 import axios from 'axios';
+
 const axiosApiIntances = axios.create({
-  baseURL: process.env.BASE_URL
+  baseURL: 'http://localhost:3030'
 });
 // Add a request interceptor
 axiosApiIntances.interceptors.request.use(
