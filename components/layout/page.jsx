@@ -9,7 +9,8 @@ export default function Layout(props) {
         <div style={{
           flex: 1,
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          marginLeft:'30px'
         }}>
           <div style={{
             display: 'flex',
