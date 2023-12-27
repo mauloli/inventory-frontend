@@ -1,3 +1,4 @@
+'use client';
 import Avatar from '@mui/material/Avatar';
 import SideBar from '../sidebar/sideBar';
 export default function Layout(props) {

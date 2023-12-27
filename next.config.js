@@ -10,6 +10,10 @@ const nextConfig = {
         source: '/dashboard',
         destination: '/',
       },
+      {
+        source: '/login',
+        destination: '/auth',
+      },
     ];
   },
 };

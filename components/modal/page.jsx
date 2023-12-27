@@ -17,16 +17,13 @@ const style = {
   borderRadius: '10px'
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function BasicModal(props) {
+  const { open, setOpen } = props;
 
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -136,9 +133,9 @@ export default function BasicModal() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end',marginRight:'10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '10px' }}>
             <button type="button" className="btn btn-success mx-3">Add</button>
-            <button type="button" class="btn btn-warning">Cancel</button>
+            <button type="button" class="btn btn-warning" onClick={() => { setOpen(false); }}>Cancel</button>
           </div>
         </Box>
       </Modal>

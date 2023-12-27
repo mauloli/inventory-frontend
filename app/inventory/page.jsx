@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@/components/layout/page';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -7,17 +7,20 @@ import './inventory.css'; // Import the external CSS file
 import Modals from '@/components/modal/page';
 
 function Page() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+
   const dummyPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <Layout selected={'inventory'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
-        <Modals />
+        <Modals open={open} setOpen={setOpen} />
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div>
             <span style={{ fontWeight: 'bold' }}>Dashboard</span>
           </div>
-          <div>
+          <div style={{ cursor: 'pointer' }} onClick={() => handleOpen()}>
             <span style={{ fontWeight: 'bold' }}>New inventory</span>
           </div>
         </div>
