@@ -7,6 +7,10 @@ import { useRouter } from 'next/navigation';
 export default function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    router.push('/');
+  };
 
   return (
     <div className={styles.boddy} style={{ margin: '0px', padding: '0px' }} >
@@ -41,18 +45,20 @@ export default function page() {
 
         </div>
         <div>
-          <button
-            style={{
-              width: '175px',
-              height: '40px',
-              border: '0px',
-              borderRadius: '13px',
-              backgroundColor: 'rgb(149, 187, 189)',
-              marginTop: '10px',
-              cursor: 'pointer'
-            }}
-            onClick={() => { router.push('/'); }}
-          >Login</button>
+          <form action="" onSubmit={handleSubmit}>
+            <button
+              style={{
+                width: '175px',
+                height: '40px',
+                border: '0px',
+                borderRadius: '13px',
+                backgroundColor: 'rgb(149, 187, 189)',
+                marginTop: '10px',
+                cursor: 'pointer'
+              }}
+              onClick={() => { router.push('/'); }}
+            >Login</button>
+          </form>
         </div>
 
       </div>

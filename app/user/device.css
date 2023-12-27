@@ -1,0 +1,11 @@
+table,
+th,
+td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  text-align: center;
+  height: 40px;
+  font-weight: normal;
+  font-size: 12px;
+  height: 45px;
+}

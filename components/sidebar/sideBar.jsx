@@ -15,12 +15,12 @@ function SideBar(props) {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingTop: '40px',
+      paddingTop: '30px',
       paddingRight: '30px',
-      backgroundColor:'#F6FDCF'
+      backgroundColor: '#F6FDCF'
     }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <h1 style={{ cursor: 'pointer' }}>LOGO</h1>
+        <img src='./ssni.png' alt="" width={'240px'} />
       </div>
       <div className='sideBar' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', height: '100%' }}>
         <div className='generalBar' style={{ display: 'flex', flexDirection: 'column', height: '50%' }}>
@@ -44,7 +44,10 @@ function SideBar(props) {
           <span style={{ fontWeight: 'bold' }}>Support</span>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%', marginLeft: '20px' }}>
             <span className={` ${selected == 'contact' ? styles.selected : ''} ${styles.spanSideBar}`}>contact</span>
-            <span className={` ${selected == 'user' ? styles.selected : ''} ${styles.spanSideBar}`}>User</span>
+            <span
+              className={` ${selected == 'user' ? styles.selected : ''} ${styles.spanSideBar}`}
+              onClick={() => { router.push('user'); }}
+            >User</span>
             <span className={` ${selected == 'logout' ? styles.selected : ''} ${styles.spanSideBar}`}>Logout</span>
           </div>
         </div>
