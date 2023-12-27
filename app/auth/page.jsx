@@ -2,15 +2,24 @@
 import React from 'react';
 import styles from './auth.module.css';
 import { useRouter } from 'next/navigation';
+import axios from '../../utils/axios';
 
 
-export default function page() {
+export default async function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    router.push('/');
+    try {
+      console.log('first')
+      const login = await axios.post('/authentication')
+      console.log(login)
+    } catch (error) {
+      throw new Error(error)
+    }
+    // event.preventDefault();
+    // router.push('/');
   };
+
 
   return (
     <div className={styles.boddy} style={{ margin: '0px', padding: '0px' }} >
@@ -56,7 +65,6 @@ export default function page() {
                 marginTop: '10px',
                 cursor: 'pointer'
               }}
-              onClick={() => { router.push('/'); }}
             >Login</button>
           </form>
         </div>
