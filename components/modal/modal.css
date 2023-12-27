@@ -1,0 +1,27 @@
+.modalTableLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  /* margin: 10px 10px; */
+
+  width: 100%;
+}
+
+.modalTableLeft>input {
+  width: 90%;
+  text-align: center;
+  height: 50px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.modalTableLeft>select {
+  width: 90%;
+  text-align: center;
+  height: 50px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}

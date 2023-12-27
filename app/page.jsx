@@ -1,11 +1,11 @@
 import React from 'react';
-import Layout from '/components/layout/page';
+import Layout from '@/components/layout/page';
 import styles from './page.module.css';
 import CircleChart from '@/components/chart/circleChart';
 import VerticalChart from '@/components/chart/verticalChart';
 import HorizontalBarChart from '@/components/chart/horizontalChart';
 export default function Home() {
-  const datta = [10, 20, 5]
+  const datta = [10, 20, 5];
   const totalData = 100;
   return (
     <Layout selected={'dashboard'}>
