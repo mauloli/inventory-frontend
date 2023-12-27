@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Layout from '@/components/layout/page';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import './device.css'; // Import the external CSS file
+import './type.css'; // Import the external CSS file
 import Modals from '@/components/modal/page';
 
 function Page() {
@@ -12,7 +12,7 @@ function Page() {
 
   const dummyPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <Layout selected={'device'}>
+    <Layout selected={'type'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
         <Modals open={open} setOpen={setOpen} />
 
@@ -21,17 +21,16 @@ function Page() {
             <span style={{ fontWeight: 'bold' }}>Dashboard</span>
           </div>
           <div style={{ cursor: 'pointer' }} onClick={() => handleOpen()}>
-            <span style={{ fontWeight: 'bold' }}>New Devices</span>
+            <span style={{ fontWeight: 'bold' }}>New Type</span>
           </div>
         </div>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
           <table style={{ width: '98%', margin: '0px' }}>
             <thead style={{ backgroundColor: 'rgb(196, 196, 196)' }}>
               <tr>
-                <th style={{ width: '100px' }}>ID</th>
-                <th>Device</th>
-                <th>Brand</th>
-                <th>action</th>
+                <th style={{width:'100px'}}>ID</th>
+                <th>Type</th>
+                <th style={{width:'200px'}}>action</th>
               </tr>
             </thead>
             <tbody>
@@ -39,7 +38,6 @@ function Page() {
                 <tr key={index}>
                   <td>1</td>
                   <td>tas</td>
-                  <td>test</td>
                   <td>test</td>
                 </tr>
               ))}
