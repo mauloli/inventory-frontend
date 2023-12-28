@@ -5,10 +5,15 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import './inventory.css'; // Import the external CSS file
 import Modals from '@/components/modal/page';
+import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
+import { useRouter } from 'next/navigation';
+
 
 function Page() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+  const router = useRouter();
+
 
   const dummyPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
@@ -17,10 +22,12 @@ function Page() {
         <Modals open={open} setOpen={setOpen} />
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
-          <div>
+          <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>
+            <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
             <span style={{ fontWeight: 'bold' }}>Dashboard</span>
           </div>
           <div style={{ cursor: 'pointer' }} onClick={() => handleOpen()}>
+            <BsPlusSquareFill style={{ marginRight: '5px' }} />
             <span style={{ fontWeight: 'bold' }}>New inventory</span>
           </div>
         </div>

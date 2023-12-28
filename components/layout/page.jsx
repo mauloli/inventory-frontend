@@ -1,7 +1,12 @@
 'use client';
 import Avatar from '@mui/material/Avatar';
 import SideBar from '../sidebar/sideBar';
-export default function Layout({ selected = null, dataUser, children }) {
+import { BsSearch } from 'react-icons/bs';
+
+
+export default function Layout({ selected = null, children }) {
+  const dataUser = JSON.parse(localStorage.getItem('data'));
+
   return (
     <div style={{ width: '100%', height: '100vh', display: 'flex', backgroundColor: '#F8FCE3' }}>
       <SideBar selected={selected} />
@@ -23,10 +28,11 @@ export default function Layout({ selected = null, dataUser, children }) {
             <span>Here are your, inventory management</span>
           </div>
           <div style={{ display: 'flex', flex: 1, height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <input placeholder="search" style={{ textAlign: 'left', width: '200px', height: '30px', paddingLeft: '20px', borderRadius: '10px', border: '1px solid black' }} />
+            <input placeholder="search" style={{ textAlign: 'left', width: '200px', height: '35px', paddingLeft: '37px', borderRadius: '10px', border: '1px solid black' }} />
+            <BsSearch style={{ position: 'absolute', right: '43.5%' }} />
           </div>
           <div style={{ display: 'flex', flex: 1, height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <Avatar sx={{marginRight:'10px'}}>{dataUser.username[0].toUpperCase()}</Avatar>
+            <Avatar sx={{ marginRight: '10px' }}>{dataUser.username[0].toUpperCase()}</Avatar>
             <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '2px solid black', marginLeft: '5px', paddingLeft: '10px' }}>
               <span style={{ fontWeight: 'bold', fontSize: '20px' }}>{dataUser.username}</span>
               <span style={{ fontSize: '13px' }}>Network Engineering</span>

@@ -1,7 +1,15 @@
+/* eslint-disable react/jsx-key */
 'use client';
 import React from 'react';
 import styles from './side.module.css';
 import { useRouter } from 'next/navigation';
+import {
+  AiFillHome,
+  AiFillSetting,
+  AiFillLayout,
+  AiFillDropboxCircle,
+  AiFillFlag
+} from 'react-icons/ai';
 
 function SideBar(props) {
   const { selected = null } = props;
@@ -9,6 +17,14 @@ function SideBar(props) {
   const router = useRouter();
 
   const generalMenu = ['dashboard', 'inventory', 'device', 'type', 'location'];
+  const iconMenu = [
+    <AiFillHome />,
+    <AiFillLayout />,
+    <AiFillSetting />,
+    <AiFillDropboxCircle />,
+    <AiFillFlag />
+  ];
+
   return (
     <div style={{
       flex: 1,
@@ -28,13 +44,17 @@ function SideBar(props) {
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%', marginLeft: '20px' }}>
             {generalMenu.map((item, index) => {
               return (
-                <span
-                  key={index}
-                  className={`${selected == item ? styles.selected : ''} ${styles.spanSideBar}`}
-                  onClick={() => { router.push(`/${item}`); }}
-                >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </span>
+                <div key={index}>
+                  {iconMenu[index]}
+                  <span
+                    key={index}
+                    className={`${selected == item ? styles.selected : ''} ${styles.spanSideBar}`}
+                    onClick={() => { router.push(`/${item}`); }}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </span>
+                </div>
               );
             })}
           </div>

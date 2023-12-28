@@ -39,13 +39,13 @@ export default function BasicModal(props) {
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%' }}>
               <div className='modalTableLeft'>
                 <span>
-                  hostname
+                  Hostname
                 </span>
                 <input type="text" placeholder='162.168.1.1.1' />
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  devices
+                  Devices
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
@@ -56,7 +56,7 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  brand
+                  Brand
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
@@ -67,7 +67,7 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  type
+                  Type
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
@@ -78,7 +78,7 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  location
+                  Location
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
@@ -93,25 +93,25 @@ export default function BasicModal(props) {
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%' }}>
               <div className='modalTableLeft'>
                 <span>
-                  hostname
+                  SN / Mac
                 </span>
                 <input type="text" placeholder='162.168.1.1.1' />
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  devices
+                  IP Adress
                 </span>
                 <input type="text" placeholder='162.168.1.1.1' />
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  brand
+                  Brand
                 </span>
                 <input type="text" placeholder='162.168.1.1.1' />
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  type
+                  Year
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
@@ -122,7 +122,7 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  location
+                  Status
                 </span>
                 <select name="" id="" value='1'>
                   <option value="1" disabled>Select your option</option>
