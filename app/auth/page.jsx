@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import styles from './auth.module.css';
 import { useRouter } from 'next/navigation';
 import axios from '../../utils/axios';
-import Cookies from 'js-cookie';
 
 export default function usePage() {
   const [form, setForm] = useState({
@@ -23,11 +22,9 @@ export default function usePage() {
     try {
       event.preventDefault();
       const login = await axios.post('/authentication', form);
-      localStorage.setItem('data', JSON.stringify(login.data.user))
-      const test = localStorage.getItem('data')
-      console.log(test)
-      console.log(login.data.user)
-      // localStorage.setItem()
+      localStorage.setItem('data', JSON.stringify(login.data.user));
+      router.push('/');
+
     } catch (error) {
       if (error.response.data.message == 'Invalid login') {
         alert('Username atau password salah');
@@ -36,7 +33,6 @@ export default function usePage() {
 
       }
     }
-    // router.push('/');
   };
 
 
