@@ -10,12 +10,12 @@ import { CircleLoader } from 'react-spinners';
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const dataUser = JSON.parse(localStorage.getItem('data'));
+
   useEffect(() => {
     setLoading(true);
-    
-    const test = localStorage.getItem('data');
 
-    if (!test) {
+    if (!dataUser) {
       setTimeout(() => {
         router.push('/login');
       }, 500);
@@ -30,7 +30,7 @@ export default function Home() {
     loading ? <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F8FCE3' }}>
       <CircleLoader size={150} />
     </div> :
-      <Layout selected={'dashboard'}>
+      <Layout selected={'dashboard'} dataUser={dataUser}>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
           {/* grafik bulat */}
           <div style={{ flex: 1, display: 'flex', justifyContent: 'space-between' }}>
