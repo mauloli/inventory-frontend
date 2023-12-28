@@ -56,17 +56,6 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  Brand
-                </span>
-                <select name="" id="" value='1'>
-                  <option value="1" disabled>Select your option</option>
-                  <option value="">test</option>
-                  <option value="">tast</option>
-                  <option value="">tost</option>
-                </select>
-              </div>
-              <div className='modalTableLeft'>
-                <span>
                   Type
                 </span>
                 <select name="" id="" value='1'>
@@ -108,17 +97,6 @@ export default function BasicModal(props) {
                   Brand
                 </span>
                 <input type="text" placeholder='162.168.1.1.1' />
-              </div>
-              <div className='modalTableLeft'>
-                <span>
-                  Year
-                </span>
-                <select name="" id="" value='1'>
-                  <option value="1" disabled>Select your option</option>
-                  <option value="">test</option>
-                  <option value="">tast</option>
-                  <option value="">tost</option>
-                </select>
               </div>
               <div className='modalTableLeft'>
                 <span>

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import styles from './auth.module.css';
 import { useRouter } from 'next/navigation';
 import axios from '../../utils/axios';
+import { BsEyeFill } from 'react-icons/bs';
+
 
 export default function usePage() {
   const [form, setForm] = useState({
@@ -10,6 +12,8 @@ export default function usePage() {
     password: '',
     strategy: 'local-username'
   });
+
+  const [inputPass, setInputPass] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +30,7 @@ export default function usePage() {
       router.push('/');
 
     } catch (error) {
+      console.log(form)
       if (error.response.data.message == 'Invalid login') {
         alert('Username atau password salah');
       } else {
@@ -65,7 +70,7 @@ export default function usePage() {
             <label style={{
               textAlign: 'left', fontSize: '14px', marginBottom: '5px'
             }}>Password:</label>
-            <input type="password" id="password" name="password" required
+            <input type={inputPass ? 'password' : 'text'} id="password" name="password" required
               style={{
                 height: '45px',
                 border: 'solid 1px rgb(135, 170, 172)',
@@ -74,6 +79,10 @@ export default function usePage() {
                 textAlign: 'center',
               }}
               onChange={handleChange}
+            />
+            <BsEyeFill
+              style={{ position: 'absolute', bottom: '290px', right: '40.5%', cursor: 'pointer' }}
+              onClick={() => { setInputPass(!inputPass); console.log(inputPass) }}
             />
           </div>
 

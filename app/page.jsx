@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Layout from '@/components/layout/page';
+import Loader from '@/components/loader/loader';
 import styles from './page.module.css';
 import CircleChart from '@/components/chart/circleChart';
 import VerticalChart from '@/components/chart/verticalChart';
@@ -18,7 +19,7 @@ export default function Home() {
     if (!dataUser) {
       setTimeout(() => {
         router.push('/login');
-      }, 500);
+      }, 2100);
     } else {
       setLoading(false);
     }
@@ -27,9 +28,7 @@ export default function Home() {
   const datta = [10, 20, 5];
   const totalData = 100;
   return (
-    loading ? <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#F8FCE3' }}>
-      <CircleLoader size={150} />
-    </div> :
+    loading ? <Loader /> :
       <Layout selected={'dashboard'} dataUser={dataUser}>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
           {/* grafik bulat */}
