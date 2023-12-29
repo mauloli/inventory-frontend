@@ -6,8 +6,9 @@ import Stack from '@mui/material/Stack';
 import './inventory.css'; // Import the external CSS file
 import Modals from '@/components/modal/page';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axios from '@/utils/axios';
+import { PiNotePencil, PiTrashLight, PiQrCode } from 'react-icons/pi';
 
 
 function Page() {
@@ -16,18 +17,30 @@ function Page() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [skip, setSkip] = useState(0);
 
   const handleOpen = () => setOpen(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageParams = searchParams.get('page');
+  const [skip, setSkip] = useState(pageParams ? Number((pageParams - 1) * 10) : 10);
 
   useEffect(() => {
+    if (pageParams) {
+      setPage(Number(pageParams));
+    }
+
     getData();
   }, []);
 
   useEffect(() => {
     getData();
   }, [page]);
+
+  const handlePage = (e, v) => {
+    setPage(v);
+    setSkip((v - 1) * limit);
+    router.push(`inventory?page=${v}`);
+  };
 
   const getData = async () => {
     try {
@@ -96,7 +109,10 @@ function Page() {
                     <td>{item.ip_address}</td>
                     <td>{formattedDate}</td>
                     <td>{status}</td>
-                    <td>{'action'}</td>
+                    <td>
+                      <PiNotePencil size={20} cursor={'pointer'} />
+                      <PiQrCode size={20} cursor={'pointer'} />
+                      <PiTrashLight color='red' size={20} cursor={'pointer'} /></td>
                   </tr>
                 );
               })}
@@ -105,7 +121,7 @@ function Page() {
         </div>
         <div style={{ width: '100%', marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
           <Stack spacing={2}>
-            <Pagination count={Math.round(total / limit)} variant="outlined" shape="rounded" page={page} onChange={(e, v) => { setPage(v); setSkip((v - 1) * limit); }} />
+            <Pagination count={Math.round(total / limit)} variant="outlined" shape="rounded" page={page} onChange={handlePage} />
           </Stack>
         </div>
       </div>
