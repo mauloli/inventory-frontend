@@ -7,13 +7,36 @@ import CircleChart from '@/components/chart/circleChart';
 import VerticalChart from '@/components/chart/verticalChart';
 import HorizontalBarChart from '@/components/chart/horizontalChart';
 import { useRouter } from 'next/navigation';
-import { CircleLoader } from 'react-spinners';
+import axios from '@/utils/axios';
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [result, setResult] = useState([]);
   const router = useRouter();
   const dataUser = JSON.parse(localStorage.getItem('data'));
 
+  const reverseStatus = (data) => {
+    const sortedDataStatus = data.sort((a, b) => b.status - a.status);
+    const totalDataArray = sortedDataStatus.map(item => item.total_data);
+
+    return totalDataArray;
+  };
+
+  const getByStatus = (status) => {
+    const data = result.data_status.find(item => item.status == status).total_data;
+    return data;
+  };
+
+  const getData = async () => {
+    try {
+      const resultt = await axios.get('/dashboard');
+      setResult(resultt.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
+    getData();
     setLoading(true);
 
     if (!dataUser) {
@@ -21,12 +44,12 @@ export default function Home() {
         router.push('/login');
       }, 2100);
     } else {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 100);
     }
   }, []);
 
-  const datta = [10, 20, 5];
-  const totalData = 100;
   return (
     loading ? <Loader /> :
       <Layout selected={'dashboard'} dataUser={dataUser}>
@@ -38,8 +61,8 @@ export default function Home() {
               <div style={{ width: '200px' }}>
                 <CircleChart
                   backgroundColor={['#FF6384', '#36A2EB', '#FFCE56']}
-                  dataChart={datta}
-                  totalData={totalData}
+                  dataChart={reverseStatus(result.data_status)}
+                  totalData={result.total}
                 />
               </div>
             </div>
@@ -48,8 +71,8 @@ export default function Home() {
               <div style={{ width: '200px' }}>
                 <CircleChart
                   backgroundColor={['#36A2EB']}
-                  dataChart={[50]}
-                  totalData={totalData}
+                  dataChart={[getByStatus(1)]}
+                  totalData={result.total}
                 />
               </div>
             </div>
@@ -58,8 +81,8 @@ export default function Home() {
               <div style={{ width: '200px' }}>
                 <CircleChart
                   backgroundColor={['#FFCE56']}
-                  dataChart={[20]}
-                  totalData={totalData}
+                  dataChart={[getByStatus(0)]}
+                  totalData={result.total}
                 />
               </div>
             </div>
@@ -68,8 +91,8 @@ export default function Home() {
               <div style={{ width: '200px' }}>
                 <CircleChart
                   backgroundColor={['#FF6384']}
-                  dataChart={[30]}
-                  totalData={totalData}
+                  dataChart={[getByStatus(2)]}
+                  totalData={result.total}
                 />
               </div>
             </div>
@@ -77,12 +100,12 @@ export default function Home() {
           <div style={{ flex: 1, display: 'flex', marginTop: '60px' }}>
             <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: '90%' }}>
-                <VerticalChart />
+                <VerticalChart data={result.data_tahun}/>
               </div>
             </div>
             <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: '90%' }}>
-                <HorizontalBarChart />
+                <HorizontalBarChart data={result.data_location} />
               </div>
             </div>
           </div>

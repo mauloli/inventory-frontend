@@ -2,13 +2,14 @@
 import React from 'react';
 import { Chart, registerables } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+
 Chart.register(...registerables);
 
-const location = ['Tangcit', 'Puri Indah', 'summarecon', 'jakarta', 'tangsel', 'block m']
-
 const HorizontalBarChart = (props) => {
-  const data = {
-    labels: location,
+  const { data } = props;
+
+  const newData = {
+    labels: data.map(item => item.lokasi),
     datasets: [
       {
         label: 'Location',
@@ -17,7 +18,7 @@ const HorizontalBarChart = (props) => {
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.4)',
         hoverBorderColor: 'rgba(75,192,192,1)',
-        data: [65, 59, 80, 81, 56, 50, 60],
+        data: data.map(item => item.total_data),
       },
     ],
   };
@@ -37,7 +38,7 @@ const HorizontalBarChart = (props) => {
     },
   };
 
-  return <Bar data={data} options={options} style={{ backgroundColor: '#F6FDCF' }} />;
+  return <Bar data={newData} options={options} style={{ backgroundColor: '#F6FDCF' }} />;
 };
 
 export default HorizontalBarChart;
