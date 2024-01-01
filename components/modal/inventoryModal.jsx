@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
 import './modal.css';
+import { useState } from 'react';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -17,9 +18,50 @@ const style = {
   borderRadius: '10px'
 };
 
-export default function BasicModal(props) {
+export default function InventoryModal(props) {
   const { open, setOpen, devices } = props;
+  const [device, setDevice] = useState(0);
+  const [type, setType] = useState('');
+  const [brand, setBrand] = useState('');
+  const [status, setStatus] = useState(100);
+  const [form, setForm] = useState({
+    hostname: '',
+    mac_address: '',
+    ip_address: '',
+    status: 0,
+    user_modified: 1,
+    id_location: 0,
+    id_device: 0,
+    id_user: 0
+  });
 
+  const allStatus = [
+    { id: 0, name: 'standby' },
+    { id: 1, name: 'active' },
+    { id: 2, name: 'broken' }
+  ];
+
+  const handleDeviceChange = (e) => {
+    const { name, value } = e.target;
+    const searchBrand = devices.find(item => item.id == value);
+
+    setBrand(searchBrand.brand);
+    setType(searchBrand.type.type);
+    setDevice(value);
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleStatusChange = (e) => {
+    const { name, value } = e.target;
+
+    setStatus(value);
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleChangeForm = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
   return (
     <div>
       <Modal
@@ -41,29 +83,24 @@ export default function BasicModal(props) {
                 <span>
                   Hostname
                 </span>
-                <input type="text" placeholder='162.168.1.1.1' />
+                <input type="text" placeholder='162.168.1.1.1' name='hostname' onChange={handleChangeForm} value={form.hostname} />
               </div>
               <div className='modalTableLeft'>
                 <span>
                   Devices
                 </span>
-                <select name="" id="" value='0'>
+                <select name="id_device" id="" value={device} onChange={handleDeviceChange} >
                   <option value="0" disabled>Select your option</option>
-                  {/* {devices.map(item => (
+                  {devices.map(item => (
                     <option key={item.id} value={item.id}>{item.name}</option>
-                  ))} */}
+                  ))}
                 </select>
               </div>
               <div className='modalTableLeft'>
                 <span>
                   Type
                 </span>
-                <select name="" id="" value='1'>
-                  <option value="1" disabled>Select your option</option>
-                  <option value="">test</option>
-                  <option value="">tast</option>
-                  <option value="">tost</option>
-                </select>
+                <input type="text" placeholder='162.168.1.1.1' value={type} />
               </div>
               <div className='modalTableLeft'>
                 <span>
@@ -88,31 +125,31 @@ export default function BasicModal(props) {
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  IP Adress
+                  Brand
                 </span>
-                <input type="text" placeholder='162.168.1.1.1' />
+                <input type="text" placeholder='162.168.1.1.1' value={brand} />
               </div>
               <div className='modalTableLeft'>
                 <span>
-                  Brand
+                  IP Adress
                 </span>
-                <input type="text" placeholder='162.168.1.1.1' />
+                <input type="text" placeholder='162.168.1.1.1' disabled />
               </div>
               <div className='modalTableLeft'>
                 <span>
                   Status
                 </span>
-                <select name="" id="" value='1'>
-                  <option value="1" disabled>Select your option</option>
-                  <option value="">test</option>
-                  <option value="">tast</option>
-                  <option value="">tost</option>
+                <select name="status" id="" value={status} onChange={handleStatusChange}>
+                  <option value="100" disabled>Select your option</option>
+                  {allStatus.map(item => (
+                    <option key={item.id} value={item.id}>{item.name}</option>
+                  ))}
                 </select>
               </div>
             </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '10px' }}>
-            <button type="button" className="btn btn-success mx-3">Add</button>
+            <button type="button" className="btn btn-success mx-3" onClick={() => { console.log(form); }}>Add</button>
             <button type="button" class="btn btn-warning" onClick={() => { setOpen(false); }}>Cancel</button>
           </div>
         </Box>

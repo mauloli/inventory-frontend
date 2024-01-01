@@ -4,7 +4,7 @@ import Layout from '@/components/layout/page';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import './inventory.css'; // Import the external CSS file
-import Modals from '@/components/modal/page';
+import InventoryModal from '@/components/modal/inventoryModal';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from '@/utils/axios';
@@ -14,6 +14,7 @@ import { PiNotePencil, PiTrashLight, PiQrCode } from 'react-icons/pi';
 function Page() {
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState([]);
+  const [devices, setDevices] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -45,7 +46,10 @@ function Page() {
   const getData = async () => {
     try {
       const resultt = await axios.get(`/inventory?$limit=${limit}&$skip=${skip}`);
+      const resultDevice = await axios.get('/devices?$limit=-1');
+
       const { data } = resultt;
+      setDevices(resultDevice.data);
       setResult(data.data);
       setTotal(data.total);
     } catch (error) {
@@ -58,7 +62,7 @@ function Page() {
   return (
     <Layout selected={'inventory'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
-        <Modals open={open} setOpen={setOpen} />
+        <InventoryModal open={open} setOpen={setOpen} devices={devices}/>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>

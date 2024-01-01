@@ -30,7 +30,6 @@ export default function usePage() {
       router.push('/');
 
     } catch (error) {
-      console.log(form)
       if (error.response.data.message == 'Invalid login') {
         alert('Username atau password salah');
       } else {
