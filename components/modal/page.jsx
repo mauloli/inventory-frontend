@@ -18,7 +18,7 @@ const style = {
 };
 
 export default function BasicModal(props) {
-  const { open, setOpen, devices } = props;
+  const { open, setOpen } = props;
 
   return (
     <div>

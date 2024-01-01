@@ -18,7 +18,7 @@ function Page() {
   const [location, setLocation] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const limit = 10;
 
   const handleOpen = () => setOpen(true);
   const router = useRouter();

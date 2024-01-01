@@ -19,7 +19,7 @@ const style = {
 };
 
 export default function InventoryModal(props) {
-  const { open, setOpen, devices, locations,getData } = props;
+  const { open, setOpen, devices, locations, getData } = props;
   const [device, setDevice] = useState(0);
   const [type, setType] = useState('');
   const [brand, setBrand] = useState('');
@@ -66,9 +66,22 @@ export default function InventoryModal(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const post = await axiosApiIntances.post('/inventory', form);
+      await axiosApiIntances.post('/inventory', form);
       getData();
-
+      setForm({
+        hostname: '',
+        mac_address: '',
+        ip_address: '',
+        status: 0,
+        user_modified: 1,
+        id_location: 0,
+        id_device: 0,
+        id_user: 1
+      });
+      setOpen(false);
+      setDevice(0);
+      setType('');
+      setBrand('');
     } catch (error) {
       alert(error.response.data.name);
     }
