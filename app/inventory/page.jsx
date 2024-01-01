@@ -15,6 +15,7 @@ function Page() {
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState([]);
   const [devices, setDevices] = useState([]);
+  const [location, setLocation] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -23,7 +24,7 @@ function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pageParams = searchParams.get('page');
-  const [skip, setSkip] = useState(pageParams ? Number((pageParams - 1) * 10) : 10);
+  const [skip, setSkip] = useState(pageParams ? Number((pageParams - 1) * 10) : 0);
 
   useEffect(() => {
     if (pageParams) {
@@ -45,11 +46,13 @@ function Page() {
 
   const getData = async () => {
     try {
-      const resultt = await axios.get(`/inventory?$limit=${limit}&$skip=${skip}`);
+      const resultt = await axios.get(`/inventory?$limit=${limit}&$skip=${skip}&$sort[created_at]=-1`);
       const resultDevice = await axios.get('/devices?$limit=-1');
+      const resultLocation = await axios.get('/location?$limit=-1');
 
       const { data } = resultt;
       setDevices(resultDevice.data);
+      setLocation(resultLocation.data);
       setResult(data.data);
       setTotal(data.total);
     } catch (error) {
@@ -62,7 +65,7 @@ function Page() {
   return (
     <Layout selected={'inventory'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
-        <InventoryModal open={open} setOpen={setOpen} devices={devices}/>
+        <InventoryModal open={open} setOpen={setOpen} devices={devices} locations={location} getData={getData} />
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>
@@ -94,7 +97,7 @@ function Page() {
             </thead>
             <tbody>
               {result.map((item, index) => {
-                const createdAtDate = new Date(item.device.created_at);
+                const createdAtDate = new Date(item.created_at);
                 createdAtDate.toISOString();
                 const formattedDate = `${createdAtDate.getDate()} ${createdAtDate.toLocaleString('default', { month: 'short' })} ${createdAtDate.getFullYear()}`;
                 const status = item.status == 1 ? 'active' : item.status == 2 ? 'broken' : 'standby';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-
+import axiosApiIntances from '@/utils/axios';
 import './modal.css';
 import { useState } from 'react';
 const style = {
@@ -19,7 +19,7 @@ const style = {
 };
 
 export default function InventoryModal(props) {
-  const { open, setOpen, devices } = props;
+  const { open, setOpen, devices, locations,getData } = props;
   const [device, setDevice] = useState(0);
   const [type, setType] = useState('');
   const [brand, setBrand] = useState('');
@@ -32,7 +32,7 @@ export default function InventoryModal(props) {
     user_modified: 1,
     id_location: 0,
     id_device: 0,
-    id_user: 0
+    id_user: 1
   });
 
   const allStatus = [
@@ -62,6 +62,18 @@ export default function InventoryModal(props) {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const post = await axiosApiIntances.post('/inventory', form);
+      getData();
+
+    } catch (error) {
+      alert(error.response.data.name);
+    }
+  };
+
   return (
     <div>
       <Modal
@@ -106,11 +118,11 @@ export default function InventoryModal(props) {
                 <span>
                   Location
                 </span>
-                <select name="" id="" value='1'>
-                  <option value="1" disabled>Select your option</option>
-                  <option value="">test</option>
-                  <option value="">tast</option>
-                  <option value="">tost</option>
+                <select name="id_location" id="" value={form.id_location} onChange={handleChangeForm}>
+                  <option value="0" disabled>Select your option</option>
+                  {locations.map(item => (
+                    <option key={item.id} value={item.id}>{`${item.lokasi} ${item.room}`}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -121,7 +133,7 @@ export default function InventoryModal(props) {
                 <span>
                   SN / Mac
                 </span>
-                <input type="text" placeholder='162.168.1.1.1' />
+                <input type="text" placeholder='162.168.1.1.1' name='mac_address' onChange={handleChangeForm} value={form.mac_address} />
               </div>
               <div className='modalTableLeft'>
                 <span>
@@ -133,7 +145,7 @@ export default function InventoryModal(props) {
                 <span>
                   IP Adress
                 </span>
-                <input type="text" placeholder='162.168.1.1.1' disabled />
+                <input type="text" placeholder='162.168.1.1.1' name='ip_address' onChange={handleChangeForm} value={form.ip_address} />
               </div>
               <div className='modalTableLeft'>
                 <span>
@@ -149,7 +161,7 @@ export default function InventoryModal(props) {
             </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '10px' }}>
-            <button type="button" className="btn btn-success mx-3" onClick={() => { console.log(form); }}>Add</button>
+            <button type="button" className="btn btn-success mx-3" onClick={handleSubmit}>Add</button>
             <button type="button" class="btn btn-warning" onClick={() => { setOpen(false); }}>Cancel</button>
           </div>
         </Box>

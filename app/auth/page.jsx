@@ -27,6 +27,8 @@ export default function usePage() {
       event.preventDefault();
       const login = await axios.post('/authentication', form);
       localStorage.setItem('data', JSON.stringify(login.data.user));
+      localStorage.setItem('token', login.data.access_token);
+
       router.push('/');
 
     } catch (error) {
