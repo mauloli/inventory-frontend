@@ -5,6 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import './inventory.css'; // Import the external CSS file
 import InventoryModal from '@/components/modal/inventoryModal';
+import InventoryEditModal from '@/components/modal/editInventory';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from '@/utils/axios';
@@ -13,11 +14,13 @@ import { PiNotePencil, PiTrashLight, PiQrCode } from 'react-icons/pi';
 
 function Page() {
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [result, setResult] = useState([]);
   const [devices, setDevices] = useState([]);
   const [location, setLocation] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+  const [resultId, setResultId] = useState({});
   const limit = 10;
 
   const handleOpen = () => setOpen(true);
@@ -38,10 +41,27 @@ function Page() {
     getData();
   }, [page]);
 
+  useEffect(() => {
+    if (resultId && resultId.id)
+      setOpenEdit(true);
+  }, [resultId]);
+
   const handlePage = (e, v) => {
     setPage(v);
     setSkip((v - 1) * limit);
     router.push(`inventory?page=${v}`);
+  };
+
+  const getById = async (id) => {
+    const result = await axios.get(`/inventory/${id}`);
+    setResultId(result.data);
+  };
+
+  const handleDelete = async (id) => {
+    console.log(id)
+    const test = await axios.delete(`/inventory/${id}`);
+    console.log(test)
+    getData();
   };
 
   const getData = async () => {
@@ -66,7 +86,11 @@ function Page() {
     <Layout selected={'inventory'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
         <InventoryModal open={open} setOpen={setOpen} devices={devices} locations={location} getData={getData} />
-
+        {
+          resultId && resultId.id && openEdit
+            ? <InventoryEditModal open={openEdit} setOpen={setOpenEdit} devices={devices} locations={location} getData={getData} resultId={resultId} />
+            : ''
+        }
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>
             <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
@@ -117,9 +141,9 @@ function Page() {
                     <td>{formattedDate}</td>
                     <td>{status}</td>
                     <td>
-                      <PiNotePencil size={20} cursor={'pointer'} />
+                      <PiNotePencil size={20} cursor={'pointer'} onClick={() => { getById(item.id); }} />
                       <PiQrCode size={20} cursor={'pointer'} />
-                      <PiTrashLight color='red' size={20} cursor={'pointer'} /></td>
+                      <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { handleDelete(item.id); }} /></td>
                   </tr>
                 );
               })}
