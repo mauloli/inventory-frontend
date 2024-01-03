@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import './inventory.css'; // Import the external CSS file
 import InventoryModal from '@/components/modal/inventoryModal';
 import InventoryEditModal from '@/components/modal/editInventory';
+import ImageModal from '@/components/modal/image';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from '@/utils/axios';
@@ -15,6 +16,8 @@ import { PiNotePencil, PiTrashLight, PiQrCode } from 'react-icons/pi';
 function Page() {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openImage, setOpenImage] = useState(false);
+
   const [result, setResult] = useState([]);
   const [devices, setDevices] = useState([]);
   const [location, setLocation] = useState([]);
@@ -89,6 +92,7 @@ function Page() {
             ? <InventoryEditModal open={openEdit} setOpen={setOpenEdit} devices={devices} locations={location} getData={getData} resultId={resultId} />
             : ''
         }
+        <ImageModal open={openImage} setOpen={setOpenImage} />
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>
             <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
@@ -140,7 +144,7 @@ function Page() {
                     <td>{status}</td>
                     <td>
                       <PiNotePencil size={20} cursor={'pointer'} onClick={() => { getById(item.id); }} />
-                      <PiQrCode size={20} cursor={'pointer'} />
+                      <PiQrCode size={20} cursor={'pointer'} onClick={() => { setOpenImage(true) }} />
                       <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { handleDelete(item.id); }} /></td>
                   </tr>
                 );
