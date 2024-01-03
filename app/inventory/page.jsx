@@ -58,9 +58,7 @@ function Page() {
   };
 
   const handleDelete = async (id) => {
-    console.log(id)
-    const test = await axios.delete(`/inventory/${id}`);
-    console.log(test)
+    await axios.delete(`/inventory/${id}`);
     getData();
   };
 
