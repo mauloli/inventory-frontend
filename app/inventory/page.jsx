@@ -144,8 +144,9 @@ function Page() {
                     <td>{status}</td>
                     <td>
                       <PiNotePencil size={20} cursor={'pointer'} onClick={() => { getById(item.id); }} />
-                      <PiQrCode size={20} cursor={'pointer'} onClick={() => { setOpenImage(true) }} />
-                      <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { handleDelete(item.id); }} /></td>
+                      <PiQrCode size={20} cursor={'pointer'} onClick={() => { setOpenImage(true); }} />
+                      <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { handleDelete(item.id); }} />
+                    </td>
                   </tr>
                 );
               })}
