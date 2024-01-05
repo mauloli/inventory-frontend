@@ -4,7 +4,6 @@ import Layout from '@/components/layout/page';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import './device.css'; // Import the external CSS file
-import Modals from '@/components/modal/page';
 import DeviceModal from '@/components/modal/deviceModal';
 import { useEffect } from 'react';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
@@ -17,6 +16,7 @@ function Page() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [devices, setDevices] = useState([]);
+  const [types, setTypes] = useState([]);
 
   const searchParams = useSearchParams();
   const pageParams = searchParams.get('page');
@@ -42,12 +42,25 @@ function Page() {
   const getData = async () => {
     try {
       const result = await axios.get(`/devices?$limit=${limit}&$skip=${skip}&$sort[created_at]=-1`);
+      const resultType = await axios.get('/type?$limit=-1');
+
       const { data } = result;
       setDevices(data.data);
       setTotal(data.total);
+      setTypes(resultType.data);
     } catch (error) {
       console.log(error);
       alert(error);
+    }
+  };
+
+  const createData = async (data) => {
+    try {
+      await axios.post('/devices', data);
+      getData();
+    } catch (error) {
+      console.log(error);
+      alert(error.response.message);
     }
   };
 
@@ -57,11 +70,14 @@ function Page() {
     router.push(`device?page=${v}`);
   };
 
-  const dummyPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <Layout selected={'device'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
-        <DeviceModal open={open} setOpen={setOpen} />
+        {
+          open
+            ? <DeviceModal open={open} setOpen={setOpen} types={types} createData={createData} />
+            : ''
+        }
 
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div>
