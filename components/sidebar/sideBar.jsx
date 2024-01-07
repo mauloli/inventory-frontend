@@ -19,6 +19,11 @@ import { IoLogOut } from 'react-icons/io5';
 function SideBar(props) {
   const { selected = null } = props;
 
+  const onLogout = () => {
+    localStorage.clear();
+    router.push('/login');
+  };
+
   const router = useRouter();
 
   const generalMenu = ['dashboard', 'inventory', 'device', 'type', 'location'];
@@ -91,7 +96,10 @@ function SideBar(props) {
               <IoLogOut />
               <span
                 style={{ marginLeft: '10px' }}
-                className={` ${selected == 'logout' ? styles.selected : ''} ${styles.spanSideBar}`}>Logout</span>
+                className={` ${selected == 'logout' ? styles.selected : ''} ${styles.spanSideBar}`}
+                onClick={onLogout}
+              >
+                Logout</span>
             </div>
           </div>
         </div>

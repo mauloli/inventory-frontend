@@ -52,7 +52,6 @@ function Page() {
       setUsers(data.data);
     } catch (error) {
       console.log(error);
-      alert(error);
     }
   };
 

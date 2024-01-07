@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const axiosApiIntances = axios.create({
   baseURL: 'http://localhost:3030'
@@ -13,8 +14,10 @@ axiosApiIntances.interceptors.request.use(
     return config;
   },
   function (error) {
-    // Do something with request error
-    return Promise.reject(error);
+    const router = useRouter('/login');
+    if (error.response.data.className == 'not-authenticated') {
+      router.push('/login');
+    } return Promise.reject(error);
   }
 );
 

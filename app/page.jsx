@@ -100,7 +100,7 @@ export default function Home() {
           <div style={{ flex: 1, display: 'flex', marginTop: '60px' }}>
             <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: '90%' }}>
-                <VerticalChart data={result.data_tahun}/>
+                <VerticalChart data={result.data_tahun} />
               </div>
             </div>
             <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
