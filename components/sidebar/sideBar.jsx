@@ -10,6 +10,11 @@ import {
   AiFillDropboxCircle,
   AiFillFlag
 } from 'react-icons/ai';
+import { FaUserAlt } from 'react-icons/fa';
+import { MdContacts } from 'react-icons/md';
+import { IoLogOut } from 'react-icons/io5';
+
+
 
 function SideBar(props) {
   const { selected = null } = props;
@@ -63,12 +68,31 @@ function SideBar(props) {
         <div className='supportBar' style={{ display: 'flex', flexDirection: 'column', height: '30%', justifyContent: 'space-around' }}>
           <span style={{ fontWeight: 'bold' }}>Support</span>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%', marginLeft: '20px' }}>
-            <span className={` ${selected == 'contact' ? styles.selected : ''} ${styles.spanSideBar}`}>contact</span>
-            <span
-              className={` ${selected == 'user' ? styles.selected : ''} ${styles.spanSideBar}`}
-              onClick={() => { router.push('user'); }}
-            >User</span>
-            <span className={` ${selected == 'logout' ? styles.selected : ''} ${styles.spanSideBar}`}>Logout</span>
+            <div>
+              <MdContacts />
+              <span
+                style={{ marginLeft: '10px' }}
+                className={` ${selected == 'contact' ? styles.selected : ''} ${styles.spanSideBar}`}>contact</span>
+            </div>
+            <div>
+              <FaUserAlt />
+              <span
+                style={{ marginLeft: '10px' }}
+                className={` ${selected == 'user' ? styles.selected : ''} ${styles.spanSideBar}`}
+                onClick={() => {
+                  router.push('user');
+                }
+
+                }
+              >User
+              </span>
+            </div>
+            <div>
+              <IoLogOut />
+              <span
+                style={{ marginLeft: '10px' }}
+                className={` ${selected == 'logout' ? styles.selected : ''} ${styles.spanSideBar}`}>Logout</span>
+            </div>
           </div>
         </div>
       </div>
