@@ -81,7 +81,7 @@ function Page() {
     }
   };
 
-  const deleteData=async(id)=>{
+  const deleteData = async (id) => {
     try {
       await axios.delete(`/type/${id}`);
       getData();
@@ -107,7 +107,8 @@ function Page() {
           resultId && resultId.id && openEdit
             ? <EditTypeModal open={openEdit} setOpen={setOpenEdit} types={types} patchData={patchData} data={resultId} />
             : ''
-        }        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
+        }
+        <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div>
             <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
             <span style={{ fontWeight: 'bold' }}>Dashboard</span>
