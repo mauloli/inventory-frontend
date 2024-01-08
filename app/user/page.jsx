@@ -11,8 +11,6 @@ import { useEffect } from 'react';
 import axios from '@/utils/axios';
 import { PiNotePencil, PiTrashLight } from 'react-icons/pi';
 import { BsArrowLeftSquareFill, BsPlusSquareFill } from 'react-icons/bs';
-        
-
 function Page() {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(1);
@@ -20,6 +18,7 @@ function Page() {
   const [users, setUsers] = useState([]);
   const [openEdit, setOpenEdit] = useState(false);
   const [resultId, setResultId] = useState({});
+  const [idRole, setIdRole] = useState(0);
 
   const searchParams = useSearchParams();
   const pageParams = searchParams.get('page');
@@ -46,10 +45,14 @@ function Page() {
 
   const getData = async () => {
     try {
-      const result = await axios.get(`/users?$limit=${limit}&$skip=${skip}&$sort[created_at]=-1`);
+      const userLogin = JSON.parse(localStorage.getItem('data'));
+      const { id, id_role } = userLogin;
+
+      const result = await axios.get(`/users?$limit=${limit}&$skip=${skip}&$sort[created_at]=-1${id_role == 1 ? '' : `&id=${id}`}`);
       const { data } = result;
       setTotal(data.total);
       setUsers(data.data);
+      setIdRole(id_role);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +99,6 @@ function Page() {
     router.push(`location?page=${v}`);
   };
 
-  const dummyPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <Layout selected={'user'}>
       <div style={{ width: '100%', backgroundColor: 'white' }}>
@@ -111,10 +113,14 @@ function Page() {
             <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
             <span style={{ fontWeight: 'bold' }}>Dashboard</span>
           </div>
-          <div style={{ cursor: 'pointer' }} onClick={() => handleOpen()}>
-            <BsPlusSquareFill style={{ marginRight: '5px' }} />
-            <span style={{ fontWeight: 'bold' }}>New User</span>
-          </div>
+          {
+            idRole == 1
+              ? <div style={{ cursor: 'pointer' }} onClick={() => handleOpen()}>
+                <BsPlusSquareFill style={{ marginRight: '5px' }} />
+                <span style={{ fontWeight: 'bold' }}>New User</span>
+              </div>
+              : ''
+          }
         </div>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
           <table style={{ width: '98%', margin: '0px' }}>
@@ -136,7 +142,11 @@ function Page() {
                   <td>{item.role.name}</td>
                   <td>
                     <PiNotePencil size={20} cursor={'pointer'} onClick={() => { getById(item.id); }} />
-                    <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { deleteData(item.id); }} />
+                    {
+                      idRole == 1
+                        ? <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { deleteData(item.id); }} />
+                        : ''
+                    }
                   </td>
                 </tr>
               ))}

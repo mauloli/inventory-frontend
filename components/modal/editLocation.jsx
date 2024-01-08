@@ -69,7 +69,7 @@ export default function EditLocationModal(props) {
             </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '10px' }}>
-            <button type="button" className="btn btn-success mx-3" onClick={handleSubmit}>Add</button>
+            <button type="button" className="btn btn-success mx-3" onClick={handleSubmit}>Update</button>
             <button type="button" class="btn btn-warning" onClick={() => { setOpen(false); }}>Cancel</button>
           </div>
         </Box>
