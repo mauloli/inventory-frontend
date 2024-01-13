@@ -21,7 +21,8 @@ const style = {
 };
 
 export default function ImageModal(props) {
-  const { open, setOpen, devices, locations, getData } = props;
+  const { open, setOpen, devices, locations, getData, image } = props;
+  console.log(image)
   return (
     <div>
       <Modal
@@ -33,7 +34,7 @@ export default function ImageModal(props) {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
             <CloseButton style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }} onClick={() => { setOpen(false); }} />
             <Image
-              src="http://localhost:3030/qrCode1704269484844.png"
+              src={`http://localhost:3030/${image}`}
               alt="QR Code"
               width={400}
               height={400}

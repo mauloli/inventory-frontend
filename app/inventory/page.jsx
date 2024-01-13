@@ -23,6 +23,7 @@ function Page() {
   const [location, setLocation] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
+  const [image, setImage] = useState('');
   const [resultId, setResultId] = useState({});
   const limit = 10;
 
@@ -82,6 +83,11 @@ function Page() {
     }
   };
 
+  const handleImage = (image) => {
+    setOpenImage(true);
+    setImage(image)
+  };
+
 
   return (
     <Layout selected={'inventory'}>
@@ -92,7 +98,10 @@ function Page() {
             ? <InventoryEditModal open={openEdit} setOpen={setOpenEdit} devices={devices} locations={location} getData={getData} resultId={resultId} />
             : ''
         }
-        <ImageModal open={openImage} setOpen={setOpenImage} />
+        {openImage
+          ? <ImageModal open={openImage} setOpen={setOpenImage} image={image} />
+          : ''
+        }
         <div style={{ display: 'flex', justifyContent: 'space-between', margin: '13px' }}>
           <div onClick={() => { router.push('/'); }} style={{ cursor: 'pointer' }}>
             <BsArrowLeftSquareFill style={{ marginRight: '5px' }} />
@@ -144,7 +153,7 @@ function Page() {
                     <td>{status}</td>
                     <td>
                       <PiNotePencil size={20} cursor={'pointer'} onClick={() => { getById(item.id); }} />
-                      <PiQrCode size={20} cursor={'pointer'} onClick={() => { setOpenImage(true); }} />
+                      <PiQrCode size={20} cursor={'pointer'} onClick={() => { handleImage(item.image); }} />
                       <PiTrashLight color='red' size={20} cursor={'pointer'} onClick={() => { handleDelete(item.id); }} />
                     </td>
                   </tr>
