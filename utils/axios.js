@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 const axiosApiIntances = axios.create({
-  baseURL: 'http://localhost:3030'
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL
 });
 // Add a request interceptor
 axiosApiIntances.interceptors.request.use(
