@@ -82,7 +82,7 @@ export default function usePage() {
               onChange={handleChange}
             />
             <BsEyeFill
-              style={{ position: 'absolute', bottom: '290px', right: '40.5%', cursor: 'pointer' }}
+              style={{ position: 'absolute', bottom: '32.3%', right: '40.5%', cursor: 'pointer' }}
               onClick={() => { setInputPass(!inputPass); console.log(inputPass); }}
             />
           </div>
