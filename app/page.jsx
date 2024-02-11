@@ -44,11 +44,17 @@ export default function Home() {
         router.push('/login');
       }, 2100);
     } else {
-      setTimeout(() => {
-        setLoading(false);
-      }, 100);
+      // setTimeout(() => {
+      //   setLoading(false);
+      // }, 100);
     }
   }, []);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  },[result])
 
   return (
     loading ? <Loader /> :
@@ -59,6 +65,7 @@ export default function Home() {
             <div className={styles.circleChart}>
               <span>All devices</span>
               <div style={{ width: '200px' }}>
+                {console.log(result)}
                 <CircleChart
                   backgroundColor={['#FF6384', '#36A2EB', '#FFCE56']}
                   dataChart={reverseStatus(result.data_status)}
