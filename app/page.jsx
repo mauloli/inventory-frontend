@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   const getByStatus = (status) => {
-    const data = result.data_status.find(item => item.status == status).total_data;
+    const data = result.data_status.find(item => item.status == status)?result.data_status.find(item => item.status == status).total_data:0;
     return data;
   };
 
