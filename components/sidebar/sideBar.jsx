@@ -73,12 +73,12 @@ function SideBar(props) {
         <div className='supportBar' style={{ display: 'flex', flexDirection: 'column', height: '30%', justifyContent: 'space-around' }}>
           <span style={{ fontWeight: 'bold' }}>Support</span>
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', height: '100%', marginLeft: '20px' }}>
-            <div>
+            {/* <div>
               <MdContacts />
               <span
                 style={{ marginLeft: '10px' }}
                 className={` ${selected == 'contact' ? styles.selected : ''} ${styles.spanSideBar}`}>contact</span>
-            </div>
+            </div> */}
             <div>
               <FaUserAlt />
               <span

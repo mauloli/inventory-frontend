@@ -6,7 +6,7 @@ Chart.register(ArcElement);
 
 function CircleChart(props) {
   const { backgroundColor, dataChart, totalData } = props;
-  const presentage = dataChart.length > 1 ? 100 : Math.round((dataChart[0] / totalData) * 100);
+  const presentage = dataChart.length > 1 ? 100 : (dataChart[0] / totalData) * 100
   // console.log(presentage)
   const data = {
     // labels: ['Label 1', 'Label 2', 'Label 3'],
