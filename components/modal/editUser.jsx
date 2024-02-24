@@ -40,8 +40,16 @@ export default function EditUsersModal(props) {
       throw new Error('password tidak sesuai');
     }
 
-    patchData(form);
-    setOpen(false);
+    if(!form.password.length&&!form.password.length){
+      patchData({
+        name:form.name,
+        username:form.username
+      })
+      setOpen(false);
+    }else{
+      patchData(form);
+      setOpen(false);
+    }
   };
 
   return (
