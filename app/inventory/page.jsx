@@ -62,7 +62,12 @@ function Page() {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`/inventory/${id}`);
+    try {
+      await axios.delete(`/inventory/${id}`);
+
+    } catch (error) {
+      alert(error.response.data.message)
+    }
     getData();
   };
 
