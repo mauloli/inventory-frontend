@@ -82,6 +82,7 @@ export default function InventoryModal(props) {
       setDevice(0);
       setType('');
       setBrand('');
+      setStatus(100)
     } catch (error) {
       alert(error.response.data.name);
     }
