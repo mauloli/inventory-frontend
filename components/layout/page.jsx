@@ -17,7 +17,7 @@ export default function Layout({ selected = null, children }) {
     if (!dataUser) {
       setTimeout(() => {
         router.push('/login');
-      }, 2100);
+      }, 1500);
     } else {
       setTimeout(() => {
         setLoading(false);
