@@ -6,7 +6,7 @@ import { GridLoader } from 'react-spinners';
 
 function Loader() {
   return (
-    <div style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+    <div style={{ height: '80vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
  <GridLoader/>
   </div>
   );

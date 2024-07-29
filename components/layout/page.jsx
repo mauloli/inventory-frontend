@@ -27,7 +27,6 @@ export default function Layout({ selected = null, children }) {
 
 
   return (
-    loading ? <Loader /> :
       <div style={{ width: '100%', height: '100vh', display: 'flex', backgroundColor: '#F8FCE3' }}>
         <SideBar selected={selected} />
         <div style={{ display: 'flex', flexDirection: 'column', flex: 4 }}>
@@ -61,7 +60,7 @@ export default function Layout({ selected = null, children }) {
 
           </div>
           <div style={{ flex: 4, display: 'flex' }}>
-            {children}
+            {loading ? <Loader /> :children}
           </div>
         </div>
       </div >
